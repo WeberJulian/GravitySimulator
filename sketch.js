@@ -6,6 +6,7 @@ const DT = 1 / FPS;
 const MASS_SUN = 1.989 * 10E30;
 const RADIUS_SUN = 6.963 * 10E5;
 const G = 6.67408 * 10E-11;
+let isPaused = false;
 
 let center;
 
@@ -45,11 +46,22 @@ function draw() {
   for (let i = 0; i < objets.length; i++){
     objets[i].draw();
   }
-  tick(DT);
+  if(!isPaused){
+    tick(DT);
+  }
 }
 
 function mouseClicked() {
   objets.push(new Star(p2m(mouseX), p2m(mouseY), random(-RADIUS_SUN*10,RADIUS_SUN*10), random(-RADIUS_SUN*10,RADIUS_SUN*10)));
+}
+
+function keyPressed() {
+  if (keyCode === 32) { // corresponds to spacebar
+    isPaused = !isPaused;
+  }
+  if (keyCode === 82) { // corresponds to r
+    objets = [];
+  }
 }
 
 function tick(dt){
