@@ -4,19 +4,21 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>p5.js example</title>
+  <title>Gravity Simulator</title>
   <style>
     body {
       padding: 0;
       margin: 0;
     }
   </style>
+  <script src="io.js"></script>
   <script src="p5/p5.js"></script>
+  <script src="ui.js"></script>
   <script src="sketch.js"></script>
   <script src="stars.js"></script>
 </head>
 
-<body>
+<body ondrop="drop_handler(event)" ondragover="dragover_handler(event)">
   <main>
   </main>
 </body>

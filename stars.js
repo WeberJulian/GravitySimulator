@@ -31,15 +31,6 @@ function clamp( x, min, max ) {
     return x;
 }
 
-function starType2Mass(type){
-    switch(type){
-      case 'O':
-        return MASS_SUN * 50;
-      case 'O':
-        return MASS_SUN * 50;
-    }
-  }
-
 const types = [
     {type: 'O', temperature: 40000, mass: 50 * MASS_SUN, radius: 10 * RADIUS_SUN, prob: 0.00001},
     {type: 'B', temperature: 20000, mass: 10 * MASS_SUN, radius: 5 * RADIUS_SUN, prob: 0.1},
@@ -49,6 +40,8 @@ const types = [
     {type: 'K', temperature: 4500, mass: 0.7 * MASS_SUN, radius: 0.8 * RADIUS_SUN, prob: 8},
     {type: 'M', temperature: 3200, mass: 0.2 * MASS_SUN, radius: 0.3 * RADIUS_SUN, prob: 80}
 ];
+
+const types_name = types.map(a=>a.type);
 
 const total_prob = types.reduce((a,b)=>a+b.prob, 0);
 
