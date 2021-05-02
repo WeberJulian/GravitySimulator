@@ -11,6 +11,7 @@ let showUI = true;
 let initial_press = { x: 0, y: 0 };
 let pressed = false;
 let RTF = 1;
+let offset;
 
 // 1m = 1 pixel
 
@@ -31,12 +32,13 @@ class Star {
 
     draw() {
         fill(this.stats.color);
-        circle(m2p(this.x), m2p(this.y), m2p(this.stats.radius));
+        circle(m2p(this.x)+offset.x, m2p(this.y)+offset.y, m2p(this.stats.radius));
     }
 }
 
 function setup() {
     let cnv = createCanvas(windowWidth, windowHeight);
+    offset = createVector(0,0);
     cnv.style("display", "block");
     background(0);
     frameRate(FPS);
@@ -46,6 +48,7 @@ function setup() {
 function draw() {
     background(0);
     RTF = slider2RTF(RTF_slider.value());
+    make_offset();
     for (let i = 0; i < objets.length; i++) {
         objets[i].draw();
     }
@@ -76,8 +79,8 @@ function mouseReleased() {
     if (!(mouse_is_over_ui() && showUI)) {
         objets.push(
             new Star(
-                p2m(initial_press.x),
-                p2m(initial_press.y),
+                p2m(initial_press.x - offset.x),
+                p2m(initial_press.y - offset.y),
                 p2m(mouseX - initial_press.x),
                 p2m(mouseY - initial_press.y)
             )

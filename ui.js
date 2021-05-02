@@ -2,6 +2,8 @@ const UI_MARGIN = 20;
 const UI_WIDTH = 260;
 const UI_HEIGHT = 380;
 const TEXT_SIZE = 18;
+const EDGE_SIZE = 20;
+const OFFSET_SPEED = 4;
 
 let star_selector = 0;
 let RTF_slider;
@@ -166,4 +168,19 @@ function is_over(x, y, xbox, ybox, wbox, hbox) {
         return true;
     }
     return false;
+}
+
+function make_offset(){
+    if (mouseX<EDGE_SIZE){
+        offset.x += OFFSET_SPEED;
+    }
+    if (mouseX>windowWidth-EDGE_SIZE){
+        offset.x -= OFFSET_SPEED;
+    }
+    if (mouseY<EDGE_SIZE){
+        offset.y += OFFSET_SPEED;
+    }
+    if (mouseY>windowHeight-EDGE_SIZE){
+        offset.y -= OFFSET_SPEED;
+    }
 }
