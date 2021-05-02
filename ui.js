@@ -52,7 +52,9 @@ function drawUI() {
 }
 
 function formatNumber(num) {
-    return (num>=1 && num<=100) ? num : float(num.toPrecision(4)).toExponential();
+    return num >= 1 && num <= 100
+        ? num
+        : float(num.toPrecision(4)).toExponential();
 }
 
 function drawPause() {
@@ -104,7 +106,11 @@ function drawArrow(base, vec) {
     fill(255);
     line(base.x, base.y, vec.x, vec.y);
     pop();
-    text(`${formatNumber(p2m(distance(base, vec)))} m/s`, vec.x + UI_MARGIN, vec.y + UI_MARGIN)
+    text(
+        `${formatNumber(p2m(distance(base, vec)))} m/s`,
+        vec.x + UI_MARGIN,
+        vec.y + UI_MARGIN
+    );
     /* translate(base.x, base.y);
     rotate(vec.heading());
     let arrowSize = 7;
@@ -114,8 +120,11 @@ function drawArrow(base, vec) {
 
 function setup_slider() {
     RTF_slider = createSlider(-10, 10, 1);
-    RTF_slider.position(UI_MARGIN*2, 6 * UI_MARGIN + TEXT_SIZE * 5 + m2p(RADIUS_SUN) * 15);
-    RTF_slider.style("width", `${UI_WIDTH - 2*UI_MARGIN}px`);
+    RTF_slider.position(
+        UI_MARGIN * 2,
+        6 * UI_MARGIN + TEXT_SIZE * 5 + m2p(RADIUS_SUN) * 15
+    );
+    RTF_slider.style("width", `${UI_WIDTH - 2 * UI_MARGIN}px`);
 }
 
 function decreaseSelector() {
@@ -131,15 +140,30 @@ function increaseSelector() {
 }
 
 function slider2RTF(value) {
-    if(value > 0){ 
-        return value
+    if (value > 0) {
+        return value;
     }
-    return Math.pow(10, (value-1)*0.1);
+    return Math.pow(10, (value - 1) * 0.1);
 }
 
-function is_over_ui(x, y){
-    if(x>UI_MARGIN && x<(UI_WIDTH+UI_MARGIN) && y>UI_MARGIN && y<(UI_HEIGHT+UI_MARGIN)){
+function mouse_is_over_ui() {
+    return is_over(mouseX, mouseY, UI_MARGIN, UI_MARGIN, UI_WIDTH, UI_HEIGHT);
+}
+
+function mouse_is_over_star_selector() {
+    return is_over(
+        mouseX,
+        mouseY,
+        UI_MARGIN + UI_WIDTH / 4,
+        UI_MARGIN + (1.5 * UI_MARGIN + TEXT_SIZE + (m2p(RADIUS_SUN) * 15) / 2)/2,
+        65*2,
+        65*2
+    );
+}
+
+function is_over(x, y, xbox, ybox, wbox, hbox) {
+    if (x > xbox && x < xbox + wbox && y > ybox && y < hbox + ybox) {
         return true;
     }
-    return false
+    return false;
 }

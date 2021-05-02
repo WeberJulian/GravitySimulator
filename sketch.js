@@ -62,7 +62,10 @@ function windowResized() {
 }
 
 function mousePressed() {
-    if (!(is_over_ui(mouseX, mouseY) && showUI)) {
+    if (mouse_is_over_star_selector() && showUI) {
+        increaseSelector();
+    }
+    if (!(mouse_is_over_ui() && showUI)) {
         initial_press.x = mouseX;
         initial_press.y = mouseY;
         pressed = true;
@@ -70,7 +73,7 @@ function mousePressed() {
 }
 
 function mouseReleased() {
-    if (!(is_over_ui(mouseX, mouseY) && showUI)) {
+    if (!(mouse_is_over_ui() && showUI)) {
         objets.push(
             new Star(
                 p2m(initial_press.x),
