@@ -12,8 +12,7 @@ let initial_press = { x: 0, y: 0 };
 let pressed = false;
 let RTF = 1;
 let offset;
-
-// 1m = 1 pixel
+let delta_wheel = 0;
 
 class Star {
     constructor(x, y, vx, vy, stats) {
@@ -96,6 +95,8 @@ function keyPressed() {
     }
     if (key === "r") {
         objets = [];
+        offset.x = 0;
+        offset.y = 0;
     }
     if (key === "u") {
         showUI = !showUI;
@@ -117,6 +118,18 @@ function keyPressed() {
     if (key === "l") {
         loadJSON(objets);
     }
+}
+
+function mouseWheel(event) {
+ delta_wheel += event.delta;
+ if(delta_wheel>=100){
+  increaseSelector();
+  delta_wheel = 0;
+ }
+ if(delta_wheel<=-100){
+  decreaseSelector();
+  delta_wheel = 0;
+ }
 }
 
 function tick(dt) {
